@@ -11,7 +11,9 @@ import Firebase
 
 class Ranking_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
-    let users = [
+    var users: Array<user> = []
+    
+    /*let users = [
         user(name: "Perro", pts: 1),
         user(name: "Gato", pts: 1),
         user(name: "Escritorio", pts: 1),
@@ -19,13 +21,13 @@ class Ranking_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         user(name: "Daniel", pts: 14),
         user(name: "Duerme", pts: 15),
         user(name: "Y ne da cuenta", pts: 16)
-    ]
+    ]*/
     
     let db = Firestore.firestore()
     
     @IBOutlet weak var TableView: UITableView!
     
-    override func viewDidLoad() {
+    override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         
         view.addSubview(TableView)
@@ -37,7 +39,20 @@ class Ranking_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
 
         // Do any additional setup after loading the view.
-        
+        db.collection("Usuario").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                self.presentaAlerta(mensaje: "Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if let nickname = document.get("nickname") as? String, let uidItems = document.get("uidItems") as? Array<String> {
+                        self.users.append(user(name: nickname, pts: uidItems.count))
+                    } else {
+                        self.presentaAlerta(mensaje: "Hubo un error")
+                    }
+                }
+                self.TableView.reloadData()
+            }
+        }
         
     }
 
@@ -81,5 +96,12 @@ class Ranking_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         }
     }
 
+    
+    func presentaAlerta(mensaje: String) {
+        let alerta = UIAlertController(title: "Error", message: mensaje, preferredStyle: .alert)
+        let accion = UIAlertAction(title: "OK", style: .cancel)
+            alerta.addAction(accion)
+        present(alerta, animated: true)
+    }
     
 }

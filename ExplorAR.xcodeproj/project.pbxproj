@@ -24,6 +24,8 @@
 		3048071C29ECDA4000E2E2E2 /* Ranking_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048071B29ECDA4000E2E2E2 /* Ranking_VC.swift */; };
 		3048071E29ED03CD00E2E2E2 /* Inicio_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048071D29ED03CD00E2E2E2 /* Inicio_VC.swift */; };
 		3048072029ED13D500E2E2E2 /* RegistrarItem_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048071F29ED13D500E2E2E2 /* RegistrarItem_VC.swift */; };
+		3048072229EDF28300E2E2E2 /* BilbiotecaGlobal_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048072129EDF28300E2E2E2 /* BilbiotecaGlobal_VC.swift */; };
+		3048072629EE02AD00E2E2E2 /* UIImageView+LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048072529EE02AD00E2E2E2 /* UIImageView+LoadImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		3048071B29ECDA4000E2E2E2 /* Ranking_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranking_VC.swift; sourceTree = "<group>"; };
 		3048071D29ED03CD00E2E2E2 /* Inicio_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inicio_VC.swift; sourceTree = "<group>"; };
 		3048071F29ED13D500E2E2E2 /* RegistrarItem_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarItem_VC.swift; sourceTree = "<group>"; };
+		3048072129EDF28300E2E2E2 /* BilbiotecaGlobal_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilbiotecaGlobal_VC.swift; sourceTree = "<group>"; };
+		3048072529EE02AD00E2E2E2 /* UIImageView+LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+LoadImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 		304806EB29EB6DE400E2E2E2 = {
 			isa = PBXGroup;
 			children = (
+				3048072529EE02AD00E2E2E2 /* UIImageView+LoadImage.swift */,
+				3048072129EDF28300E2E2E2 /* BilbiotecaGlobal_VC.swift */,
 				3048071F29ED13D500E2E2E2 /* RegistrarItem_VC.swift */,
 				3048071D29ED03CD00E2E2E2 /* Inicio_VC.swift */,
 				3048071B29ECDA4000E2E2E2 /* Ranking_VC.swift */,
@@ -179,9 +185,11 @@
 				304806FA29EB6DE400E2E2E2 /* ViewController.swift in Sources */,
 				3048070F29EC9AEC00E2E2E2 /* Login_VC.swift in Sources */,
 				3048070B29EBB33900E2E2E2 /* AR_VC.swift in Sources */,
+				3048072629EE02AD00E2E2E2 /* UIImageView+LoadImage.swift in Sources */,
 				3048071A29ECB56F00E2E2E2 /* Biblio_VC.swift in Sources */,
 				3048071C29ECDA4000E2E2E2 /* Ranking_VC.swift in Sources */,
 				304806F829EB6DE400E2E2E2 /* AppDelegate.swift in Sources */,
+				3048072229EDF28300E2E2E2 /* BilbiotecaGlobal_VC.swift in Sources */,
 				3048071E29ED03CD00E2E2E2 /* Inicio_VC.swift in Sources */,
 				304806FC29EB6DE500E2E2E2 /* Experience.rcproject in Sources */,
 				3048072029ED13D500E2E2E2 /* RegistrarItem_VC.swift in Sources */,

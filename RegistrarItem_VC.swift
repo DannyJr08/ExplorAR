@@ -14,6 +14,7 @@ class RegistrarItem_VC: UIViewController, UIImagePickerControllerDelegate, UINav
     
     @IBOutlet weak var tfNombreItem: UITextField!
     @IBOutlet weak var lfDescripcion: UITextField!
+    @IBOutlet weak var btnConfirmarDatos: UIButton!
     @IBOutlet weak var btnCamara: UIButton!
     
     var foto = UIImage()
@@ -32,60 +33,56 @@ class RegistrarItem_VC: UIViewController, UIImagePickerControllerDelegate, UINav
     override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
         
+        btnConfirmarDatos.isHidden = false
         btnCamara.isHidden = true
-        
-        // Set up a timer to check every 10 seconds
-        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { timer in
-                    
-                // Check if both text fields have at least on echaracter
-                if let text1 = self.tfNombreItem.text, !text1.isEmpty,
-                let text2 = self.lfDescripcion.text, !text2.isEmpty {
-                        
-                // Show the button
-                self.btnCamara.isHidden = false
-            }
-        }
+        tfNombreItem.isEnabled = true
+        lfDescripcion.isEnabled = true
     }
     
-    func fetchFloatValueFromAPI(header1: String, header2: String) {
-        // Create URL request with headers
-        let url = URL(string: "http://localhost:3007")!
-        var request = URLRequest(url: url)
-        request.addValue(header1, forHTTPHeaderField: "word")
-        request.addValue(header2, forHTTPHeaderField: "input")
+    func getAccuracy(word: String, input: String, completion: @escaping (Float?) -> Void) {
+        let urlComponents = NSURLComponents(string: "http://localhost:3007/api/accuracy")!
+
+        urlComponents.queryItems = [
+            URLQueryItem(name: "word", value: word),
+            URLQueryItem(name: "input", value: input)
+        ]
+
+        let request = URLRequest(url: urlComponents.url!)
         
-        // Send request
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // Check for errors
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                print("Error en la solicitud:", error ?? "Error desconocido")
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
                 return
             }
             
-            // Parse JSON response
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                guard let floatValue = json as? Float else {
-                    print("Error: Could not convert JSON response to float")
-                    return
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let accuracy = json["accuracy"] as? NSNumber {
+                    DispatchQueue.main.async {
+                        completion(accuracy.floatValue)
+                    }
+                } else {
+                    print("Error al analizar el JSON")
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
                 }
-                
-                // Display alert with float value
-                let alert = UIAlertController(title: "Float Value", message: "\(floatValue)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
+            } catch let error {
+                print("Error al procesar el JSON:", error)
                 DispatchQueue.main.async {
-                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+                    completion(nil)
                 }
-            } catch {
-                print("Error: \(error.localizedDescription)")
             }
-        }.resume()
+        }
+        
+        task.resume()
     }
 
+
     @IBAction func TomarFoto(_ sender: UIButton) {
-        
-        fetchFloatValueFromAPI(header1: tfNombreItem.text!, header2: lfDescripcion.text!)
-        
         
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .camera
@@ -141,7 +138,7 @@ class RegistrarItem_VC: UIViewController, UIImagePickerControllerDelegate, UINav
                     }
                 }
                 
-                self.subirDatos(url: urlString);
+                self.subirDatos(url: urlString)
             })
         })
         
@@ -159,6 +156,37 @@ class RegistrarItem_VC: UIViewController, UIImagePickerControllerDelegate, UINav
             alerta.addAction(accion)
         present(alerta, animated: true)
     }
+    
+    @IBAction func ConfirmarDatos(_ sender: UIButton) {
+        // Check if both text fields have at least one character
+            if let text1 = tfNombreItem.text, !text1.isEmpty,
+            let text2 = lfDescripcion.text, !text2.isEmpty {
+                
+                self.getAccuracy(word: tfNombreItem.text!, input: lfDescripcion.text!) { accuracy in
+                    if let accuracy = accuracy {
+                        let alerta = UIAlertController(title: "Si tienes un porcentaje mayor de 70, puedes tomar la foto.", message: "\(accuracy)", preferredStyle: .alert)
+                        let accion = UIAlertAction(title: "OK", style: .cancel)
+                        alerta.addAction(accion)
+                        self.present(alerta, animated: true)
+                        
+                        if accuracy >= 70 {
+                            // Show the button
+                            self.btnConfirmarDatos.isHidden = true
+                            self.tfNombreItem.isEnabled = false
+                            self.lfDescripcion.isEnabled = false
+                            self.btnCamara.isHidden = false
+                        }
+                    } else {
+                        self.presentaAlerta(mensaje: "No se pudo obtener el JSON")
+                    }
+                }
+
+            }
+            else {
+                presentaAlerta(mensaje: "Debes llenar todos los campos.")
+            }
+    }
+    
     
     func subirDatos(url: String) {
         if tfNombreItem.text?.isEmpty == true || lfDescripcion.text?.isEmpty == true {
@@ -180,4 +208,10 @@ class RegistrarItem_VC: UIViewController, UIImagePickerControllerDelegate, UINav
             }
         }
     }
+    
+    
+    @IBAction func quitaTeclado(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
 }

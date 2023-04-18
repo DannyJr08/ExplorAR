@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B682D488-DBBF-4A7F-B1A7-E6E8103E6867"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B354392F-A532-4E6E-8B0B-D930D06506CC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ranking_VC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "user"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BDB29D4-7C9A-4D74-B00E-C20E52A80EA1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RegistrarItem_VC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "presentaAlerta(mensaje:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2BDB29D4-7C9A-4D74-B00E-C20E52A80EA1 - 6d09f7d7099da0f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ExplorAR.RegistrarItem_VC.ConfirmarDatos(__C.UIButton) -&gt; ()"
+                  moduleName = "ExplorAR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danny/Documents/ITESM/6to%20Semestre/iOS%20Hackathon/ExplorAR/RegistrarItem_VC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "2BDB29D4-7C9A-4D74-B00E-C20E52A80EA1 - 6d09f7d7099da0f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ExplorAR.RegistrarItem_VC.ConfirmarDatos(__C.UIButton) -&gt; ()"
+                  moduleName = "ExplorAR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danny/Documents/ITESM/6to%20Semestre/iOS%20Hackathon/ExplorAR/RegistrarItem_VC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "328">
+               </Location>
+               <Location
+                  uuid = "2BDB29D4-7C9A-4D74-B00E-C20E52A80EA1 - 6d09f7d7099da0f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ExplorAR.RegistrarItem_VC.ConfirmarDatos(__C.UIButton) -&gt; ()"
+                  moduleName = "ExplorAR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danny/Documents/ITESM/6to%20Semestre/iOS%20Hackathon/ExplorAR/RegistrarItem_VC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "2548">
+               </Location>
+               <Location
+                  uuid = "2BDB29D4-7C9A-4D74-B00E-C20E52A80EA1 - f3ed04d7a77d925c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ExplorAR.RegistrarItem_VC.presentaAlerta(mensaje: Swift.String) -&gt; ()"
+                  moduleName = "ExplorAR"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danny/Documents/ITESM/6to%20Semestre/iOS%20Hackathon/ExplorAR/RegistrarItem_VC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -42,7 +42,7 @@ class Inicio_VC: UIViewController {
                 try auth.signOut()
                 let defaults = UserDefaults.standard
                 defaults.set(false, forKey: "isUserSignedIn")
-                self.performSegue(withIdentifier: "PerfilALogin", sender: self)
+                self.performSegue(withIdentifier: "InicioALogin", sender: self)
             }
             catch let signOutError {
                 let alerta = UIAlertController(title: "Error", message: signOutError.localizedDescription, preferredStyle: .alert)

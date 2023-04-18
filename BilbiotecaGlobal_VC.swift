@@ -1,17 +1,16 @@
 //
-//  Biblio_VC.swift
+//  BilbiotecaGlobal_VC.swift
 //  ExplorAR
 //
-//  Created by Juan Daniel Rodríguez Oropeza on 16/04/23.
+//  Created by Juan Daniel Rodríguez Oropeza on 17/04/23.
 //
 
 import UIKit
-import FirebaseAuth
 import Firebase
 
-class Biblio_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
-    
-    var listaIDNomItems: Array<String> = []
+
+
+class BilbiotecaGlobal_VC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let db = Firestore.firestore()
     
@@ -41,26 +40,18 @@ class Biblio_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
         
 
         // Do any additional setup after loading the view.
-        db.collection("Usuario").document(Auth.auth().currentUser!.uid).getDocument {
-            (documentSnapshot, error) in
-            if let document = documentSnapshot, error == nil {
-                if let idItems = document.get("uidItems") as? Array<String> {
-                    //self.listaIdMedicos = idMedicos
-                    //print("")
-                    print(idItems)
-                    if idItems == [] {
-                        let alerta = UIAlertController(title: "Aviso: NO tienes médicos vinculados.", message: "Primero el médico te tiene que agregar ingresando el token que se genera en la sección de perfil, en el ícono de la esquina superior izquierda.", preferredStyle: .alert)
-                        let accion = UIAlertAction(title: "OK", style: .cancel) { accion in self.dismiss(animated: true)}
-                        alerta.addAction(accion)
-                        self.present(alerta, animated: true)
-                    }
-                    else {
-                        self.getItems(ids: idItems)
+        db.collection("Item").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                self.presentaAlerta(mensaje: "Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if let nombre = document.get("nombre") as? String, let descripcion = document.get("descripcion") as? String, let urlImg = document.get("urlImg") as? String {
+                        self.items.append(item(name: nombre, image: urlImg, desc: descripcion))
+                    } else {
+                        self.presentaAlerta(mensaje: error!.localizedDescription)
                     }
                 }
-            }
-            else {
-                self.presentaAlerta(mensaje: error!.localizedDescription)
+                self.TableView.reloadData()
             }
         }
     }
@@ -114,23 +105,6 @@ class Biblio_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
             fatalError("init(coder:) has not been implemented")
         }
     }
-    
-    func getItems(ids: Array<String>) {
-        for id in stride(from: 0, to: ids.count, by: 1) {
-            self.listaIDNomItems.append(ids[id])
-            db.collection("Item").document(ids[id]).getDocument {
-                (documentSnapshot, error) in
-                if let document = documentSnapshot, error == nil {
-                    if let nombre = document.get("nombre") as? String, let descripcion = document.get("descripcion") as? String, let urlImg = document.get("urlImg") as? String {
-                        self.items.append(item(name: nombre, image: urlImg, desc: descripcion))
-                    } else {
-                        self.presentaAlerta(mensaje: error!.localizedDescription)
-                    }
-                    self.TableView.reloadData()
-                }
-            }
-        }
-    }
 
     func presentaAlerta(mensaje: String) {
         let alerta = UIAlertController(title: "Error", message: mensaje, preferredStyle: .alert)
@@ -138,4 +112,5 @@ class Biblio_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
             alerta.addAction(accion)
         present(alerta, animated: true)
     }
+
 }
